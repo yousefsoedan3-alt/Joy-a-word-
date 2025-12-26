@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>توثيق</title>
+</head>
+<body style="text-align:center;font-family:sans-serif">
+
+<h2>توثيق صورة</h2>
+
+<video id="video" autoplay playsinline width="300"></video><br><br>
+<button onclick="takePhoto()">📸 تصوير</button><br><br>
+
+<canvas id="canvas" width="300" height="225" style="display:none;"></canvas>
+<a id="download" download="photo.png">⬇️ حفظ الصورة</a>
+
+<script>
+navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
+.then(stream => video.srcObject = stream);
+
+function takePhoto() {
+  canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+  download.href = canvas.toDataURL("image/png");
+}
+</script>
+
+</body>
+</html>
